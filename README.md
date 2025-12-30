@@ -83,13 +83,3 @@ There is a `google_signin_setup.txt` in the repo with notes for configuring Goog
 ## Contributing ✨
 
 - PRs welcome — please include tests if adding behavior.
-- Add a LICENSE file if you want to publish under a permissive license.
-
----
-
-If you'd like, I can also:
-
-- add a `.env.example` file with placeholder values ✅
-- add a short `CONTRIBUTING.md` or `LICENSE` file
-
-— enjoy!
