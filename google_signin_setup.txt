@@ -1,0 +1,50 @@
+Here are the steps to set up Google Sign-in for your project:
+
+1.  **Go to the Google API Console:**
+    Navigate to [https://console.developers.google.com/](https://console.developers.google.com/).
+
+2.  **Create or Select a Project:**
+    Create a new project or select an existing one from the project dropdown.
+
+3.  **Go to Credentials:**
+    In the left-hand navigation menu, go to "APIs & Services" > "Credentials".
+
+4.  **Create OAuth Client ID:**
+    Click on "+ CREATE CREDENTIALS" at the top of the page and select "OAuth client ID".
+
+5.  **Configure OAuth Client ID:**
+    *   For the "Application type", select "Web application".
+    *   Give it a name (e.g., "Devlinks App").
+
+6.  **Add Authorized URIs:**
+    *   Under "Authorized JavaScript origins", click "+ ADD URI" and enter `http://localhost:3000`.
+    *   Under "Authorized redirect URIs", click "+ ADD URI" and enter `http://localhost:3000/api/auth/callback/google`.
+
+7.  **Create and Copy Credentials:**
+    *   Click the "CREATE" button.
+    *   A modal will appear showing "Your Client ID" and "Your Client Secret". Copy both of these values.
+
+8.  **Set Environment Variables:**
+    *   In the root of your project, create a file named `.env` if it doesn't already exist.
+    *   Add the following lines to your `.env` file, replacing the placeholders with the credentials you copied in the previous step:
+
+    ```
+    GOOGLE_CLIENT_ID=YOUR_CLIENT_ID
+    GOOGLE_CLIENT_SECRET=YOUR_CLIENT_SECRET
+    ```
+
+9.  **Set Database URL:**
+    Your `auth.ts` file also requires a database connection string. Add your PostgreSQL database URL to your `.env` file:
+
+    ```
+    DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+    ```
+    Replace `USER`, `PASSWORD`, `HOST`, `PORT`, and `DATABASE` with your actual database connection details.
+
+10. **Restart Your Server:**
+    Stop your Next.js development server if it's running and restart it with:
+    ```bash
+    npm run dev
+    ```
+
+After following these steps, you should be able to sign in with Google on your application.

@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --text-heading: 23px;
+}
+
+button {
+  cursor: pointer;
+
+  &:active{
+    scale: 95%;
+  }
+}
