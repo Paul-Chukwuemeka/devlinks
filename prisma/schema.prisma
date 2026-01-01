@@ -89,6 +89,7 @@ model LinkCollection {
   cardId String
   card   Card   @relation(fields: [cardId], references: [id])
   links  Link[]
+  orderNum     Int            @default(0)
 }
 
 model Link {
@@ -96,6 +97,6 @@ model Link {
   title        String
   url          String
   orderNum     Int            @default(0)
-  collectionId String
-  collection   LinkCollection @relation(fields: [collectionId], references: [id])
+  collectionId String?
+  collection   LinkCollection? @relation(fields: [collectionId], references: [id])
 }

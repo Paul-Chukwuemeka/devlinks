@@ -11,3 +11,12 @@ button {
     scale: 95%;
   }
 }
+
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.link-btn{
+  @apply h-12 gap-2 border flex items-center p-2
+}
