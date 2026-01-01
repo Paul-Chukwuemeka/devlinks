@@ -41,6 +41,10 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     getData();
   }, [currentUser,user]);
 
+  useEffect(()=>{
+    
+  },[])
+
   useEffect(() => {
     console.log("Preview Mode:", isPreviewMode);
   }, [isPreviewMode]);

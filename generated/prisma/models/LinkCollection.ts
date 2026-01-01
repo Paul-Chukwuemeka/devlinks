@@ -20,46 +20,76 @@ export type LinkCollectionModel = runtime.Types.Result.DefaultSelection<Prisma.$
 
 export type AggregateLinkCollection = {
   _count: LinkCollectionCountAggregateOutputType | null
+  _avg: LinkCollectionAvgAggregateOutputType | null
+  _sum: LinkCollectionSumAggregateOutputType | null
   _min: LinkCollectionMinAggregateOutputType | null
   _max: LinkCollectionMaxAggregateOutputType | null
+}
+
+export type LinkCollectionAvgAggregateOutputType = {
+  orderNum: number | null
+}
+
+export type LinkCollectionSumAggregateOutputType = {
+  orderNum: number | null
 }
 
 export type LinkCollectionMinAggregateOutputType = {
   id: string | null
   title: string | null
   cardId: string | null
+  active: boolean | null
+  orderNum: number | null
 }
 
 export type LinkCollectionMaxAggregateOutputType = {
   id: string | null
   title: string | null
   cardId: string | null
+  active: boolean | null
+  orderNum: number | null
 }
 
 export type LinkCollectionCountAggregateOutputType = {
   id: number
   title: number
   cardId: number
+  active: number
+  orderNum: number
   _all: number
 }
 
+
+export type LinkCollectionAvgAggregateInputType = {
+  orderNum?: true
+}
+
+export type LinkCollectionSumAggregateInputType = {
+  orderNum?: true
+}
 
 export type LinkCollectionMinAggregateInputType = {
   id?: true
   title?: true
   cardId?: true
+  active?: true
+  orderNum?: true
 }
 
 export type LinkCollectionMaxAggregateInputType = {
   id?: true
   title?: true
   cardId?: true
+  active?: true
+  orderNum?: true
 }
 
 export type LinkCollectionCountAggregateInputType = {
   id?: true
   title?: true
   cardId?: true
+  active?: true
+  orderNum?: true
   _all?: true
 }
 
@@ -101,6 +131,18 @@ export type LinkCollectionAggregateArgs<ExtArgs extends runtime.Types.Extensions
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: LinkCollectionAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: LinkCollectionSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: LinkCollectionMinAggregateInputType
@@ -131,6 +173,8 @@ export type LinkCollectionGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   _count?: LinkCollectionCountAggregateInputType | true
+  _avg?: LinkCollectionAvgAggregateInputType
+  _sum?: LinkCollectionSumAggregateInputType
   _min?: LinkCollectionMinAggregateInputType
   _max?: LinkCollectionMaxAggregateInputType
 }
@@ -139,7 +183,11 @@ export type LinkCollectionGroupByOutputType = {
   id: string
   title: string
   cardId: string
+  active: boolean
+  orderNum: number
   _count: LinkCollectionCountAggregateOutputType | null
+  _avg: LinkCollectionAvgAggregateOutputType | null
+  _sum: LinkCollectionSumAggregateOutputType | null
   _min: LinkCollectionMinAggregateOutputType | null
   _max: LinkCollectionMaxAggregateOutputType | null
 }
@@ -166,6 +214,8 @@ export type LinkCollectionWhereInput = {
   id?: Prisma.StringFilter<"LinkCollection"> | string
   title?: Prisma.StringFilter<"LinkCollection"> | string
   cardId?: Prisma.StringFilter<"LinkCollection"> | string
+  active?: Prisma.BoolFilter<"LinkCollection"> | boolean
+  orderNum?: Prisma.IntFilter<"LinkCollection"> | number
   card?: Prisma.XOR<Prisma.CardScalarRelationFilter, Prisma.CardWhereInput>
   links?: Prisma.LinkListRelationFilter
 }
@@ -174,6 +224,8 @@ export type LinkCollectionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  orderNum?: Prisma.SortOrder
   card?: Prisma.CardOrderByWithRelationInput
   links?: Prisma.LinkOrderByRelationAggregateInput
 }
@@ -185,6 +237,8 @@ export type LinkCollectionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LinkCollectionWhereInput | Prisma.LinkCollectionWhereInput[]
   title?: Prisma.StringFilter<"LinkCollection"> | string
   cardId?: Prisma.StringFilter<"LinkCollection"> | string
+  active?: Prisma.BoolFilter<"LinkCollection"> | boolean
+  orderNum?: Prisma.IntFilter<"LinkCollection"> | number
   card?: Prisma.XOR<Prisma.CardScalarRelationFilter, Prisma.CardWhereInput>
   links?: Prisma.LinkListRelationFilter
 }, "id">
@@ -193,9 +247,13 @@ export type LinkCollectionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  orderNum?: Prisma.SortOrder
   _count?: Prisma.LinkCollectionCountOrderByAggregateInput
+  _avg?: Prisma.LinkCollectionAvgOrderByAggregateInput
   _max?: Prisma.LinkCollectionMaxOrderByAggregateInput
   _min?: Prisma.LinkCollectionMinOrderByAggregateInput
+  _sum?: Prisma.LinkCollectionSumOrderByAggregateInput
 }
 
 export type LinkCollectionScalarWhereWithAggregatesInput = {
@@ -205,11 +263,15 @@ export type LinkCollectionScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"LinkCollection"> | string
   title?: Prisma.StringWithAggregatesFilter<"LinkCollection"> | string
   cardId?: Prisma.StringWithAggregatesFilter<"LinkCollection"> | string
+  active?: Prisma.BoolWithAggregatesFilter<"LinkCollection"> | boolean
+  orderNum?: Prisma.IntWithAggregatesFilter<"LinkCollection"> | number
 }
 
 export type LinkCollectionCreateInput = {
   id?: string
   title: string
+  active?: boolean
+  orderNum?: number
   card: Prisma.CardCreateNestedOneWithoutCollectionsInput
   links?: Prisma.LinkCreateNestedManyWithoutCollectionInput
 }
@@ -218,12 +280,16 @@ export type LinkCollectionUncheckedCreateInput = {
   id?: string
   title: string
   cardId: string
+  active?: boolean
+  orderNum?: number
   links?: Prisma.LinkUncheckedCreateNestedManyWithoutCollectionInput
 }
 
 export type LinkCollectionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
   card?: Prisma.CardUpdateOneRequiredWithoutCollectionsNestedInput
   links?: Prisma.LinkUpdateManyWithoutCollectionNestedInput
 }
@@ -232,6 +298,8 @@ export type LinkCollectionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.LinkUncheckedUpdateManyWithoutCollectionNestedInput
 }
 
@@ -239,17 +307,23 @@ export type LinkCollectionCreateManyInput = {
   id?: string
   title: string
   cardId: string
+  active?: boolean
+  orderNum?: number
 }
 
 export type LinkCollectionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LinkCollectionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LinkCollectionListRelationFilter = {
@@ -266,23 +340,37 @@ export type LinkCollectionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  orderNum?: Prisma.SortOrder
+}
+
+export type LinkCollectionAvgOrderByAggregateInput = {
+  orderNum?: Prisma.SortOrder
 }
 
 export type LinkCollectionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  orderNum?: Prisma.SortOrder
 }
 
 export type LinkCollectionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  orderNum?: Prisma.SortOrder
 }
 
-export type LinkCollectionScalarRelationFilter = {
-  is?: Prisma.LinkCollectionWhereInput
-  isNot?: Prisma.LinkCollectionWhereInput
+export type LinkCollectionSumOrderByAggregateInput = {
+  orderNum?: Prisma.SortOrder
+}
+
+export type LinkCollectionNullableScalarRelationFilter = {
+  is?: Prisma.LinkCollectionWhereInput | null
+  isNot?: Prisma.LinkCollectionWhereInput | null
 }
 
 export type LinkCollectionCreateNestedManyWithoutCardInput = {
@@ -327,16 +415,26 @@ export type LinkCollectionUncheckedUpdateManyWithoutCardNestedInput = {
   deleteMany?: Prisma.LinkCollectionScalarWhereInput | Prisma.LinkCollectionScalarWhereInput[]
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type LinkCollectionCreateNestedOneWithoutLinksInput = {
   create?: Prisma.XOR<Prisma.LinkCollectionCreateWithoutLinksInput, Prisma.LinkCollectionUncheckedCreateWithoutLinksInput>
   connectOrCreate?: Prisma.LinkCollectionCreateOrConnectWithoutLinksInput
   connect?: Prisma.LinkCollectionWhereUniqueInput
 }
 
-export type LinkCollectionUpdateOneRequiredWithoutLinksNestedInput = {
+export type LinkCollectionUpdateOneWithoutLinksNestedInput = {
   create?: Prisma.XOR<Prisma.LinkCollectionCreateWithoutLinksInput, Prisma.LinkCollectionUncheckedCreateWithoutLinksInput>
   connectOrCreate?: Prisma.LinkCollectionCreateOrConnectWithoutLinksInput
   upsert?: Prisma.LinkCollectionUpsertWithoutLinksInput
+  disconnect?: Prisma.LinkCollectionWhereInput | boolean
+  delete?: Prisma.LinkCollectionWhereInput | boolean
   connect?: Prisma.LinkCollectionWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.LinkCollectionUpdateToOneWithWhereWithoutLinksInput, Prisma.LinkCollectionUpdateWithoutLinksInput>, Prisma.LinkCollectionUncheckedUpdateWithoutLinksInput>
 }
@@ -344,12 +442,16 @@ export type LinkCollectionUpdateOneRequiredWithoutLinksNestedInput = {
 export type LinkCollectionCreateWithoutCardInput = {
   id?: string
   title: string
+  active?: boolean
+  orderNum?: number
   links?: Prisma.LinkCreateNestedManyWithoutCollectionInput
 }
 
 export type LinkCollectionUncheckedCreateWithoutCardInput = {
   id?: string
   title: string
+  active?: boolean
+  orderNum?: number
   links?: Prisma.LinkUncheckedCreateNestedManyWithoutCollectionInput
 }
 
@@ -386,11 +488,15 @@ export type LinkCollectionScalarWhereInput = {
   id?: Prisma.StringFilter<"LinkCollection"> | string
   title?: Prisma.StringFilter<"LinkCollection"> | string
   cardId?: Prisma.StringFilter<"LinkCollection"> | string
+  active?: Prisma.BoolFilter<"LinkCollection"> | boolean
+  orderNum?: Prisma.IntFilter<"LinkCollection"> | number
 }
 
 export type LinkCollectionCreateWithoutLinksInput = {
   id?: string
   title: string
+  active?: boolean
+  orderNum?: number
   card: Prisma.CardCreateNestedOneWithoutCollectionsInput
 }
 
@@ -398,6 +504,8 @@ export type LinkCollectionUncheckedCreateWithoutLinksInput = {
   id?: string
   title: string
   cardId: string
+  active?: boolean
+  orderNum?: number
 }
 
 export type LinkCollectionCreateOrConnectWithoutLinksInput = {
@@ -419,6 +527,8 @@ export type LinkCollectionUpdateToOneWithWhereWithoutLinksInput = {
 export type LinkCollectionUpdateWithoutLinksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
   card?: Prisma.CardUpdateOneRequiredWithoutCollectionsNestedInput
 }
 
@@ -426,28 +536,38 @@ export type LinkCollectionUncheckedUpdateWithoutLinksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LinkCollectionCreateManyCardInput = {
   id?: string
   title: string
+  active?: boolean
+  orderNum?: number
 }
 
 export type LinkCollectionUpdateWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.LinkUpdateManyWithoutCollectionNestedInput
 }
 
 export type LinkCollectionUncheckedUpdateWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.LinkUncheckedUpdateManyWithoutCollectionNestedInput
 }
 
 export type LinkCollectionUncheckedUpdateManyWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderNum?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -485,6 +605,8 @@ export type LinkCollectionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   title?: boolean
   cardId?: boolean
+  active?: boolean
+  orderNum?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
   links?: boolean | Prisma.LinkCollection$linksArgs<ExtArgs>
   _count?: boolean | Prisma.LinkCollectionCountOutputTypeDefaultArgs<ExtArgs>
@@ -494,6 +616,8 @@ export type LinkCollectionSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   title?: boolean
   cardId?: boolean
+  active?: boolean
+  orderNum?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["linkCollection"]>
 
@@ -501,6 +625,8 @@ export type LinkCollectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   title?: boolean
   cardId?: boolean
+  active?: boolean
+  orderNum?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["linkCollection"]>
 
@@ -508,9 +634,11 @@ export type LinkCollectionSelectScalar = {
   id?: boolean
   title?: boolean
   cardId?: boolean
+  active?: boolean
+  orderNum?: boolean
 }
 
-export type LinkCollectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "cardId", ExtArgs["result"]["linkCollection"]>
+export type LinkCollectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "cardId" | "active" | "orderNum", ExtArgs["result"]["linkCollection"]>
 export type LinkCollectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
   links?: boolean | Prisma.LinkCollection$linksArgs<ExtArgs>
@@ -533,6 +661,8 @@ export type $LinkCollectionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     id: string
     title: string
     cardId: string
+    active: boolean
+    orderNum: number
   }, ExtArgs["result"]["linkCollection"]>
   composites: {}
 }
@@ -961,6 +1091,8 @@ export interface LinkCollectionFieldRefs {
   readonly id: Prisma.FieldRef<"LinkCollection", 'String'>
   readonly title: Prisma.FieldRef<"LinkCollection", 'String'>
   readonly cardId: Prisma.FieldRef<"LinkCollection", 'String'>
+  readonly active: Prisma.FieldRef<"LinkCollection", 'Boolean'>
+  readonly orderNum: Prisma.FieldRef<"LinkCollection", 'Int'>
 }
     
 

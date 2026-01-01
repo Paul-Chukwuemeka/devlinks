@@ -2,6 +2,7 @@ import React from "react";
 import { LinkType } from "@/types/types";
 import { useContext } from "react";
 import { AppContext } from "@/contexts/app_context";
+import { addLink } from "@/app/actions/addLink";
 
 interface NewLinkModalProps {
   setIsAddingLink: (value: boolean) => void;
@@ -19,14 +20,15 @@ const New_Link_modal = ({
   const handleAddLink = () => {
     if (newLink.title && newLink.url) {
       const link: LinkType = {
-        id: Date.now().toString(),
         title: newLink.title,
         url: newLink.url.startsWith("http")
           ? newLink.url
           : `https://${newLink.url}`,
-        active: true,
+        orderNum: links ? links.length + 1 : 1,
       };
-      setLinks(links ? [...links, link] : [link]);
+      addLink(link).then(() => {
+        setLinks(links ? [...links, link] : [link]);
+      });
       setNewLink({ title: "", url: "" });
       setIsAddingLink(false);
     }

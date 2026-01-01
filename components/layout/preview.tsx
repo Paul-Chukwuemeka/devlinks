@@ -18,6 +18,8 @@ const Preview = () => {
       return "";
     }
   }
+
+  
   return (
     <div className="hidden lg:flex items-center justify-center p-6">
       <div className="border-2 border-gray-200 rounded-xl w-80 h-full max-h-160">

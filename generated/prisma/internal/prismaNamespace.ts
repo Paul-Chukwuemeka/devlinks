@@ -1041,7 +1041,9 @@ export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof Card
 export const LinkCollectionScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  cardId: 'cardId'
+  cardId: 'cardId',
+  active: 'active',
+  orderNum: 'orderNum'
 } as const
 
 export type LinkCollectionScalarFieldEnum = (typeof LinkCollectionScalarFieldEnum)[keyof typeof LinkCollectionScalarFieldEnum]
@@ -1052,7 +1054,8 @@ export const LinkScalarFieldEnum = {
   title: 'title',
   url: 'url',
   orderNum: 'orderNum',
-  collectionId: 'collectionId'
+  collectionId: 'collectionId',
+  active: 'active'
 } as const
 
 export type LinkScalarFieldEnum = (typeof LinkScalarFieldEnum)[keyof typeof LinkScalarFieldEnum]

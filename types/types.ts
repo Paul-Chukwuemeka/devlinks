@@ -37,6 +37,14 @@ export type LinkType = {
   url: string;
   active?: boolean;
   id?: string;
+  orderNum?: number;
+  collectionId?: string | null
+};
+
+export type CreateLinkInput = {
+  title: string;
+  url: string;
+  orderNum?: number;
 };
 
 export type collectionType = {

@@ -40,6 +40,7 @@ export type LinkMinAggregateOutputType = {
   url: string | null
   orderNum: number | null
   collectionId: string | null
+  active: boolean | null
 }
 
 export type LinkMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type LinkMaxAggregateOutputType = {
   url: string | null
   orderNum: number | null
   collectionId: string | null
+  active: boolean | null
 }
 
 export type LinkCountAggregateOutputType = {
@@ -56,6 +58,7 @@ export type LinkCountAggregateOutputType = {
   url: number
   orderNum: number
   collectionId: number
+  active: number
   _all: number
 }
 
@@ -74,6 +77,7 @@ export type LinkMinAggregateInputType = {
   url?: true
   orderNum?: true
   collectionId?: true
+  active?: true
 }
 
 export type LinkMaxAggregateInputType = {
@@ -82,6 +86,7 @@ export type LinkMaxAggregateInputType = {
   url?: true
   orderNum?: true
   collectionId?: true
+  active?: true
 }
 
 export type LinkCountAggregateInputType = {
@@ -90,6 +95,7 @@ export type LinkCountAggregateInputType = {
   url?: true
   orderNum?: true
   collectionId?: true
+  active?: true
   _all?: true
 }
 
@@ -184,7 +190,8 @@ export type LinkGroupByOutputType = {
   title: string
   url: string
   orderNum: number
-  collectionId: string
+  collectionId: string | null
+  active: boolean
   _count: LinkCountAggregateOutputType | null
   _avg: LinkAvgAggregateOutputType | null
   _sum: LinkSumAggregateOutputType | null
@@ -215,8 +222,9 @@ export type LinkWhereInput = {
   title?: Prisma.StringFilter<"Link"> | string
   url?: Prisma.StringFilter<"Link"> | string
   orderNum?: Prisma.IntFilter<"Link"> | number
-  collectionId?: Prisma.StringFilter<"Link"> | string
-  collection?: Prisma.XOR<Prisma.LinkCollectionScalarRelationFilter, Prisma.LinkCollectionWhereInput>
+  collectionId?: Prisma.StringNullableFilter<"Link"> | string | null
+  active?: Prisma.BoolFilter<"Link"> | boolean
+  collection?: Prisma.XOR<Prisma.LinkCollectionNullableScalarRelationFilter, Prisma.LinkCollectionWhereInput> | null
 }
 
 export type LinkOrderByWithRelationInput = {
@@ -224,28 +232,32 @@ export type LinkOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
   orderNum?: Prisma.SortOrder
-  collectionId?: Prisma.SortOrder
+  collectionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
   collection?: Prisma.LinkCollectionOrderByWithRelationInput
 }
 
 export type LinkWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  collectionId_orderNum?: Prisma.LinkCollectionIdOrderNumCompoundUniqueInput
   AND?: Prisma.LinkWhereInput | Prisma.LinkWhereInput[]
   OR?: Prisma.LinkWhereInput[]
   NOT?: Prisma.LinkWhereInput | Prisma.LinkWhereInput[]
   title?: Prisma.StringFilter<"Link"> | string
   url?: Prisma.StringFilter<"Link"> | string
   orderNum?: Prisma.IntFilter<"Link"> | number
-  collectionId?: Prisma.StringFilter<"Link"> | string
-  collection?: Prisma.XOR<Prisma.LinkCollectionScalarRelationFilter, Prisma.LinkCollectionWhereInput>
-}, "id">
+  collectionId?: Prisma.StringNullableFilter<"Link"> | string | null
+  active?: Prisma.BoolFilter<"Link"> | boolean
+  collection?: Prisma.XOR<Prisma.LinkCollectionNullableScalarRelationFilter, Prisma.LinkCollectionWhereInput> | null
+}, "id" | "collectionId_orderNum">
 
 export type LinkOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
   orderNum?: Prisma.SortOrder
-  collectionId?: Prisma.SortOrder
+  collectionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
   _count?: Prisma.LinkCountOrderByAggregateInput
   _avg?: Prisma.LinkAvgOrderByAggregateInput
   _max?: Prisma.LinkMaxOrderByAggregateInput
@@ -261,7 +273,8 @@ export type LinkScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Link"> | string
   url?: Prisma.StringWithAggregatesFilter<"Link"> | string
   orderNum?: Prisma.IntWithAggregatesFilter<"Link"> | number
-  collectionId?: Prisma.StringWithAggregatesFilter<"Link"> | string
+  collectionId?: Prisma.StringNullableWithAggregatesFilter<"Link"> | string | null
+  active?: Prisma.BoolWithAggregatesFilter<"Link"> | boolean
 }
 
 export type LinkCreateInput = {
@@ -269,7 +282,8 @@ export type LinkCreateInput = {
   title: string
   url: string
   orderNum?: number
-  collection: Prisma.LinkCollectionCreateNestedOneWithoutLinksInput
+  active?: boolean
+  collection?: Prisma.LinkCollectionCreateNestedOneWithoutLinksInput
 }
 
 export type LinkUncheckedCreateInput = {
@@ -277,7 +291,8 @@ export type LinkUncheckedCreateInput = {
   title: string
   url: string
   orderNum?: number
-  collectionId: string
+  collectionId?: string | null
+  active?: boolean
 }
 
 export type LinkUpdateInput = {
@@ -285,7 +300,8 @@ export type LinkUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   orderNum?: Prisma.IntFieldUpdateOperationsInput | number
-  collection?: Prisma.LinkCollectionUpdateOneRequiredWithoutLinksNestedInput
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  collection?: Prisma.LinkCollectionUpdateOneWithoutLinksNestedInput
 }
 
 export type LinkUncheckedUpdateInput = {
@@ -293,7 +309,8 @@ export type LinkUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   orderNum?: Prisma.IntFieldUpdateOperationsInput | number
-  collectionId?: Prisma.StringFieldUpdateOperationsInput | string
+  collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LinkCreateManyInput = {
@@ -301,7 +318,8 @@ export type LinkCreateManyInput = {
   title: string
   url: string
   orderNum?: number
-  collectionId: string
+  collectionId?: string | null
+  active?: boolean
 }
 
 export type LinkUpdateManyMutationInput = {
@@ -309,6 +327,7 @@ export type LinkUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   orderNum?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LinkUncheckedUpdateManyInput = {
@@ -316,7 +335,8 @@ export type LinkUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   orderNum?: Prisma.IntFieldUpdateOperationsInput | number
-  collectionId?: Prisma.StringFieldUpdateOperationsInput | string
+  collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LinkListRelationFilter = {
@@ -329,12 +349,18 @@ export type LinkOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type LinkCollectionIdOrderNumCompoundUniqueInput = {
+  collectionId: string
+  orderNum: number
+}
+
 export type LinkCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
   orderNum?: Prisma.SortOrder
   collectionId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
 }
 
 export type LinkAvgOrderByAggregateInput = {
@@ -347,6 +373,7 @@ export type LinkMaxOrderByAggregateInput = {
   url?: Prisma.SortOrder
   orderNum?: Prisma.SortOrder
   collectionId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
 }
 
 export type LinkMinOrderByAggregateInput = {
@@ -355,6 +382,7 @@ export type LinkMinOrderByAggregateInput = {
   url?: Prisma.SortOrder
   orderNum?: Prisma.SortOrder
   collectionId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
 }
 
 export type LinkSumOrderByAggregateInput = {
@@ -403,19 +431,12 @@ export type LinkUncheckedUpdateManyWithoutCollectionNestedInput = {
   deleteMany?: Prisma.LinkScalarWhereInput | Prisma.LinkScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type LinkCreateWithoutCollectionInput = {
   id?: string
   title: string
   url: string
   orderNum?: number
+  active?: boolean
 }
 
 export type LinkUncheckedCreateWithoutCollectionInput = {
@@ -423,6 +444,7 @@ export type LinkUncheckedCreateWithoutCollectionInput = {
   title: string
   url: string
   orderNum?: number
+  active?: boolean
 }
 
 export type LinkCreateOrConnectWithoutCollectionInput = {
@@ -459,7 +481,8 @@ export type LinkScalarWhereInput = {
   title?: Prisma.StringFilter<"Link"> | string
   url?: Prisma.StringFilter<"Link"> | string
   orderNum?: Prisma.IntFilter<"Link"> | number
-  collectionId?: Prisma.StringFilter<"Link"> | string
+  collectionId?: Prisma.StringNullableFilter<"Link"> | string | null
+  active?: Prisma.BoolFilter<"Link"> | boolean
 }
 
 export type LinkCreateManyCollectionInput = {
@@ -467,6 +490,7 @@ export type LinkCreateManyCollectionInput = {
   title: string
   url: string
   orderNum?: number
+  active?: boolean
 }
 
 export type LinkUpdateWithoutCollectionInput = {
@@ -474,6 +498,7 @@ export type LinkUpdateWithoutCollectionInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   orderNum?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LinkUncheckedUpdateWithoutCollectionInput = {
@@ -481,6 +506,7 @@ export type LinkUncheckedUpdateWithoutCollectionInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   orderNum?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LinkUncheckedUpdateManyWithoutCollectionInput = {
@@ -488,6 +514,7 @@ export type LinkUncheckedUpdateManyWithoutCollectionInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   orderNum?: Prisma.IntFieldUpdateOperationsInput | number
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -498,7 +525,8 @@ export type LinkSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   url?: boolean
   orderNum?: boolean
   collectionId?: boolean
-  collection?: boolean | Prisma.LinkCollectionDefaultArgs<ExtArgs>
+  active?: boolean
+  collection?: boolean | Prisma.Link$collectionArgs<ExtArgs>
 }, ExtArgs["result"]["link"]>
 
 export type LinkSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -507,7 +535,8 @@ export type LinkSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   url?: boolean
   orderNum?: boolean
   collectionId?: boolean
-  collection?: boolean | Prisma.LinkCollectionDefaultArgs<ExtArgs>
+  active?: boolean
+  collection?: boolean | Prisma.Link$collectionArgs<ExtArgs>
 }, ExtArgs["result"]["link"]>
 
 export type LinkSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -516,7 +545,8 @@ export type LinkSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   url?: boolean
   orderNum?: boolean
   collectionId?: boolean
-  collection?: boolean | Prisma.LinkCollectionDefaultArgs<ExtArgs>
+  active?: boolean
+  collection?: boolean | Prisma.Link$collectionArgs<ExtArgs>
 }, ExtArgs["result"]["link"]>
 
 export type LinkSelectScalar = {
@@ -525,30 +555,32 @@ export type LinkSelectScalar = {
   url?: boolean
   orderNum?: boolean
   collectionId?: boolean
+  active?: boolean
 }
 
-export type LinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "url" | "orderNum" | "collectionId", ExtArgs["result"]["link"]>
+export type LinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "url" | "orderNum" | "collectionId" | "active", ExtArgs["result"]["link"]>
 export type LinkInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  collection?: boolean | Prisma.LinkCollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.Link$collectionArgs<ExtArgs>
 }
 export type LinkIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  collection?: boolean | Prisma.LinkCollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.Link$collectionArgs<ExtArgs>
 }
 export type LinkIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  collection?: boolean | Prisma.LinkCollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.Link$collectionArgs<ExtArgs>
 }
 
 export type $LinkPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Link"
   objects: {
-    collection: Prisma.$LinkCollectionPayload<ExtArgs>
+    collection: Prisma.$LinkCollectionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
     url: string
     orderNum: number
-    collectionId: string
+    collectionId: string | null
+    active: boolean
   }, ExtArgs["result"]["link"]>
   composites: {}
 }
@@ -943,7 +975,7 @@ readonly fields: LinkFieldRefs;
  */
 export interface Prisma__LinkClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  collection<T extends Prisma.LinkCollectionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LinkCollectionDefaultArgs<ExtArgs>>): Prisma.Prisma__LinkCollectionClient<runtime.Types.Result.GetResult<Prisma.$LinkCollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  collection<T extends Prisma.Link$collectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Link$collectionArgs<ExtArgs>>): Prisma.Prisma__LinkCollectionClient<runtime.Types.Result.GetResult<Prisma.$LinkCollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -978,6 +1010,7 @@ export interface LinkFieldRefs {
   readonly url: Prisma.FieldRef<"Link", 'String'>
   readonly orderNum: Prisma.FieldRef<"Link", 'Int'>
   readonly collectionId: Prisma.FieldRef<"Link", 'String'>
+  readonly active: Prisma.FieldRef<"Link", 'Boolean'>
 }
     
 
@@ -1371,6 +1404,25 @@ export type LinkDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Links to delete.
    */
   limit?: number
+}
+
+/**
+ * Link.collection
+ */
+export type Link$collectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LinkCollection
+   */
+  select?: Prisma.LinkCollectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LinkCollection
+   */
+  omit?: Prisma.LinkCollectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LinkCollectionInclude<ExtArgs> | null
+  where?: Prisma.LinkCollectionWhereInput
 }
 
 /**
