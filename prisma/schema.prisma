@@ -89,6 +89,7 @@ model LinkCollection {
   cardId String
   card   Card   @relation(fields: [cardId], references: [id])
   links  Link[]
+  active       Boolean        @default(true)
   orderNum     Int            @default(0)
 }
 
@@ -98,5 +99,9 @@ model Link {
   url          String
   orderNum     Int            @default(0)
   collectionId String?
+  active       Boolean        @default(true)
   collection   LinkCollection? @relation(fields: [collectionId], references: [id])
+
+  @@unique([collectionId, orderNum])
+  @@index([collectionId])
 }
