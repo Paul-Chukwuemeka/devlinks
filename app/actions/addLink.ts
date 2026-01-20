@@ -1,6 +1,7 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import { CreateLinkInput } from "@/types/types";
+import { LinkCreateInput } from "@/generated/prisma/models";
 
 export async function addLink(link: CreateLinkInput, collectionId?: string) {
   return prisma.link.create({
@@ -12,3 +13,4 @@ export async function addLink(link: CreateLinkInput, collectionId?: string) {
     },
   });
 }
+

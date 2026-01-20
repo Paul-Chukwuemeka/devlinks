@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -10,66 +8,69 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified Boolean   @default(false)
-  username      String?
-  bio           String?
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  sessions      Session[]
-  cards         Card[]
+  id              String           @id @default(cuid())
+  name            String?
+  email           String           @unique
+  emailVerified   Boolean          @default(false)
+  username        String?
+  bio             String?
+  image           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  accounts        Account[]
+  sessions        Session[]
+  cards           Card[]
+  linkCollections LinkCollection[]
+  links           Link[]
 
   @@map("user")
 }
-model Account {
-  id                       String   @id @default(cuid())
-  userId                   String
-  providerId               String
-  accountId                String
-  password                 String?
-  type                     String?
-  accessToken              String?
-  refreshToken             String?
-  idToken                  String?
-  scope                    String?
-  accessTokenExpiresAt     DateTime?
-  refreshTokenExpiresAt    DateTime?
-  createdAt                DateTime @default(now())
-  updatedAt                DateTime @updatedAt
 
-  user                     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Account {
+  id                    String    @id @default(cuid())
+  userId                String
+  providerId            String
+  accountId             String
+  password              String?
+  type                  String?
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  scope                 String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([providerId, accountId])
   @@map("account")
 }
 
 model Session {
-  id          String   @id @default(cuid())
-  userId      String
-  token       String   @unique
-  expiresAt   DateTime
-  ipAddress   String?
-  userAgent   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("session")
 }
 
 model Verification {
-  id         String   @id @default(cuid())
+  id         String @id @default(cuid())
   identifier String
 
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  value     String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("verification")
 }
@@ -81,27 +82,40 @@ model Card {
   userId      String
   user        User             @relation(fields: [userId], references: [id])
   collections LinkCollection[]
+
+  @@map("card")
+
 }
 
 model LinkCollection {
-  id     String @id @default(uuid())
-  title  String
-  cardId String
-  card   Card   @relation(fields: [cardId], references: [id])
-  links  Link[]
-  active       Boolean        @default(true)
-  orderNum     Int            @default(0)
+  id       String  @id @default(uuid())
+  title    String
+  cardId   String
+  card     Card    @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+  links    Link[]
+  active   Boolean @default(true)
+  orderNum Int     @default(0)
+
+  @@map("link_Collection")
+
 }
 
 model Link {
-  id           String         @id @default(uuid())
+  id           String          @id @default(uuid())
+  userId       String
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   title        String
   url          String
-  orderNum     Int            @default(0)
+  orderNum     Int             @default(0)
   collectionId String?
-  active       Boolean        @default(true)
-  collection   LinkCollection? @relation(fields: [collectionId], references: [id])
+  active       Boolean         @default(true)
+  collection   LinkCollection? @relation(fields: [collectionId], references: [id], onDelete: Cascade)
 
   @@unique([collectionId, orderNum])
   @@index([collectionId])
+
+  @@map("link")
+
 }

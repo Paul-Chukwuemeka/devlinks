@@ -1042,6 +1042,7 @@ export const LinkCollectionScalarFieldEnum = {
   id: 'id',
   title: 'title',
   cardId: 'cardId',
+  userId: 'userId',
   active: 'active',
   orderNum: 'orderNum'
 } as const
@@ -1051,6 +1052,7 @@ export type LinkCollectionScalarFieldEnum = (typeof LinkCollectionScalarFieldEnu
 
 export const LinkScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   title: 'title',
   url: 'url',
   orderNum: 'orderNum',

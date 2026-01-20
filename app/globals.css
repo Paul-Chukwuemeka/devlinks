@@ -20,3 +20,12 @@ button {
 .link-btn{
   @apply h-12 gap-2 border flex items-center p-2
 }
+
+.text-base{
+  @apply w-full h-full outline-none p-2
+}
+
+.input-span{
+  @apply peer-focus:top-0 -z-1 peer-focus:z-1 peer-focus:bg-white absolute duration-500 top-1/2 left-3 transform -translate-y-1/2
+}
+

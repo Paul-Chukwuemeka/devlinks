@@ -1,5 +1,3 @@
-
-
 export type cardType = {
   id: string;
   userId: string;
@@ -30,18 +28,19 @@ export type AppContextType = {
   setDisplay: (display: DisplayType) => void;
 };
 
-// Link types 
+// Link types
 
 export type LinkType = {
   title: string;
   url: string;
   active?: boolean;
-  id?: string;
+  userId: string;
   orderNum?: number;
-  collectionId?: string | null
+  collectionId?: string | null;
 };
 
 export type CreateLinkInput = {
+  userId: string;
   title: string;
   url: string;
   orderNum?: number;
@@ -52,7 +51,6 @@ export type collectionType = {
   links: LinkType[];
   id: string;
 };
-
 
 // profile types
 export type profileType = {

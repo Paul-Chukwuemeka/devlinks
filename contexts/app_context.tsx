@@ -41,9 +41,14 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     getData();
   }, [currentUser,user]);
 
-  useEffect(()=>{
-    
-  },[])
+  // useEffect(()=>{
+  //   async function fetchLinks() {
+  //     if (user && user.links) {
+  //       setLinks(user.links);
+  //     }
+  //   }
+  //   fetchLinks();
+  // },[])
 
   useEffect(() => {
     console.log("Preview Mode:", isPreviewMode);

@@ -15,12 +15,13 @@ const New_Link_modal = ({
   newLink,
   setNewLink,
 }: NewLinkModalProps) => {
-  const { setLinks, links } = useContext(AppContext)!;
+  const { setLinks, links,user } = useContext(AppContext)!;
 
   const handleAddLink = () => {
     if (newLink.title && newLink.url) {
       const link: LinkType = {
         title: newLink.title,
+        userId: user!.id,
         url: newLink.url.startsWith("http")
           ? newLink.url
           : `https://${newLink.url}`,
@@ -29,7 +30,7 @@ const New_Link_modal = ({
       addLink(link).then(() => {
         setLinks(links ? [...links, link] : [link]);
       });
-      setNewLink({ title: "", url: "" });
+      setNewLink({ title: "", url: "" , userId: ""});
       setIsAddingLink(false);
     }
   };
@@ -63,7 +64,7 @@ const New_Link_modal = ({
           <button
             onClick={() => {
               setIsAddingLink(false);
-              setNewLink({ title: "", url: "" });
+              setNewLink({ title: "", url: "", userId: "" });
             }}
             className="btn btn-ghost"
           >
