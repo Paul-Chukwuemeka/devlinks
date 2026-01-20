@@ -25,10 +25,9 @@ const GoogleButton = () => {
       type="button"
       onClick={handleLogin}
       disabled={isLoading}
-      className="w-full h-12 flex items-center justify-center gap-3 bg-[var(--surface-primary)] border border-[var(--border-light)] rounded-xl font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-tertiary)] hover:border-[var(--border-medium)] active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed shadow-sm transition-all duration-200"
-    >
+      className="auth-button"    >
       {isLoading ? (
-        <Loader2 className="animate-spin text-xl text-[var(--text-secondary)]" />
+        <Loader2 className="animate-spin text-xl" />
       ) : (
         <FcGoogle className="text-xl" />
       )}

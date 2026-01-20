@@ -1,8 +1,9 @@
 "use client";
-import { useContext } from "react";
+import { use, useContext } from "react";
 import { AppContext } from "@/contexts/app_context";
 import { authClient } from "@/lib/auth-client";
 import { SignOutAction } from "@/app/actions/auth";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../ui/logo";
@@ -41,10 +42,11 @@ const Sidebar = () => {
     setDisplay(id);
     setIsMobileOpen(false);
   };
+  const router = useRouter();
 
   const handleLogout = () => {
     SignOutAction();
-    window.location.reload();
+    router.push("/");
   };
 
   return (

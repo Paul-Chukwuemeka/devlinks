@@ -2,30 +2,40 @@
 
 @theme {
   --text-heading: 23px;
+  --text-primary: #212020;
+  --text-body:16px;
+  --text-display: 40px;
+  --color-primary-600: #00a63e
 }
 
 button {
   cursor: pointer;
 
-  &:active{
+  &:active {
     scale: 95%;
   }
 }
 
+.auth-button{
+@apply w-full h-12 flex items-center justify-center gap-3 border rounded-lg font-semibold   active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed shadow-sm transition-all duration-200
+}
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-.link-btn{
-  @apply h-12 gap-2 border flex items-center p-2
+.link-btn {
+  @apply h-12 gap-2 border flex items-center p-2;
 }
 
-.text-base{
-  @apply w-full h-full outline-none p-2
+.text-base {
+  @apply w-full h-full outline-none p-2;
 }
 
-.input-span{
-  @apply peer-focus:top-0 -z-1 peer-focus:z-1 peer-focus:bg-white absolute duration-500 top-1/2 left-3 transform -translate-y-1/2
+.input-span {
+  @apply peer-focus:top-0 text-body -z-1 peer-focus:z-1 peer-focus:bg-white absolute duration-500 top-1/2 left-3 transform -translate-y-1/2;
 }
 
+.auth-input {
+  @apply border relative [&>input]:overflow-hidden rounded-lg h-14;
+}

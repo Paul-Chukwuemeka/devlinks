@@ -10,8 +10,7 @@ export async function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL("/auth/signin", req.url));
   }
 
-  if (!req.url.includes("admin")) {
-    console.log("test")
+  if (token && !req.url.includes("admin")) {
     return NextResponse.redirect(new URL("/admin", req.url));
   }
 

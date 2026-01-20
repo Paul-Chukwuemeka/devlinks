@@ -28,26 +28,27 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-8 bg-surface-primary">
+      <div className="flex-1 flex items-center justify-center max-lg:items-start max-lg:pt-10 p-8 bg-surface-primary">
         <div className="w-full max-w-md space-y-8">
-          <div className="lg:hidden flex items-center gap-3 justify-center mb-8">
-            <Logo width={40} height={40} color="var(--primary-600)" />
-            <span className="text-2xl font-bold text-text-primary">
+          <div className="lg:hidden flex  items-center gap-1 justify-center mb-8">
+            <Logo width={40} height={40} />
+            <span className="text-2xl font-bold">
               DevLinks
             </span>
           </div>
 
           <div className="text-center lg:text-left">
-            <h2 className="text-display text-text-primary mb-2">
+            <h2 className="text-display font-semibold text-text-primary mb-2">
               Welcome back
             </h2>
-            <p className="text-body text-text-secondary">
+    
+            <p className="text-body font-medium text-text-secondary">
               Sign in to your account to continue
             </p>
           </div>
 
           <form action={SignInAction} className="space-y-5">
-            <div className="auth-input border  relative rounded-lg h-14 ">
+            <div className="auth-input">
               <input
                 type="email"
                 name="email"
@@ -59,7 +60,7 @@ const Page = () => {
               </span>
             </div>
 
-            <div className="auth-input border relative password rounded-lg h-14 ">
+            <div className="auth-input">
               <input
                 type="password"
                 name="password"
@@ -74,7 +75,7 @@ const Page = () => {
             <div className="flex items-center justify-end">
               <Link
                 href="/auth/forgot-password"
-                className="text-sm font-medium text-primary-600 hover:text-primary-700"
+                className="text-body font-medium  hover:text-primary-700"
               >
                 Forgot password?
               </Link>
@@ -82,7 +83,7 @@ const Page = () => {
 
             <button
               type="submit"
-              className="btn btn-primary w-full h-12 text-base"
+              className=" w-full h-12 text-base auth-button"
             >
               Sign In
             </button>
@@ -92,7 +93,7 @@ const Page = () => {
                 <div className="w-full border-t border-border-light" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-surface-primary text-text-tertiary font-medium">
+                <span className="px-4 bg-white text-body font-medium">
                   OR
                 </span>
               </div>
@@ -101,11 +102,11 @@ const Page = () => {
             <GoogleButton />
           </form>
 
-          <p className="text-center text-text-secondary">
+          <p className="text-center text-body">
             Don&apos;t have an account?{" "}
             <Link
               href="/auth/signup"
-              className="font-semibold text-primary-600 hover:text-primary-700"
+              className="font-semibold  hover:text-primary-700"
             >
               Sign Up
             </Link>
