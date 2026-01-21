@@ -27,7 +27,7 @@ const New_Link_modal = ({
           : `https://${newLink.url}`,
         orderNum: links ? links.length + 1 : 1,
       };
-      addLink(link).then(() => {
+      addLink(link,user?.id).then(() => {
         setLinks(links ? [...links, link] : [link]);
       });
       setNewLink({ title: "", url: "" , userId: ""});

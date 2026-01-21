@@ -1,5 +1,5 @@
 "use client";
-import { use, useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "@/contexts/app_context";
 import { authClient } from "@/lib/auth-client";
 import { SignOutAction } from "@/app/actions/auth";
@@ -25,24 +25,28 @@ interface NavItem {
   id: NavItemType;
   label: string;
   icon: React.ReactNode;
+  url: string
 }
 
 const navItems: NavItem[] = [
-  { id: "links", label: "Links", icon: <Link2 size={20} /> },
-  { id: "profile", label: "Profile", icon: <User size={20} /> },
-  { id: "appearance", label: "Appearance", icon: <Palette size={20} /> },
-  { id: "settings", label: "Settings", icon: <Settings size={20} /> },
+  { id: "links", label: "Links", url:"/admin", icon: <Link2 size={20} /> },
+  { id: "profile", label: "Profile", url:"/admin/profile-setup", icon: <User size={20} /> },
+  { id: "appearance", label: "Appearance", url:"/admin/appearance", icon: <Palette size={20} /> },
+  { id: "settings", label: "Settings", url:"/admin/settings", icon: <Settings size={20} /> },
 ];
 
 const Sidebar = () => {
   const { display, setDisplay, user } = useContext(AppContext)!;
   const { data } = authClient.useSession();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const handleNavClick = (id: NavItemType) => {
+  const router = useRouter();
+
+
+  const handleNavClick = (id: NavItemType, url: string) => {
     setDisplay(id);
     setIsMobileOpen(false);
+    router.push(url);
   };
-  const router = useRouter();
 
   const handleLogout = () => {
     SignOutAction();
@@ -51,7 +55,6 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button
         className="lg:hidden fixed top-4 left-4 z-20 btn btn-secondary btn-icon"
         onClick={() => setIsMobileOpen(true)}
@@ -59,7 +62,6 @@ const Sidebar = () => {
         <Menu size={20} />
       </button>
 
-      {/* Mobile Overlay */}
       {isMobileOpen && (
         <div
           className="lg:hidden fixed bg-black/50 z-30 animate-fade-in inset-0"
@@ -67,7 +69,6 @@ const Sidebar = () => {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`
           fixed lg:sticky top-0 left-0 z-40
@@ -80,7 +81,6 @@ const Sidebar = () => {
           }
         `}
       >
-        {/* Close Button for Mobile */}
         {isMobileOpen && (
           <button
             className="lg:hidden absolute right-4 top-5 font-semibold cursor-pointer"
@@ -90,7 +90,6 @@ const Sidebar = () => {
             <X size={22} />
           </button>
         )}
-        {/* Logo Section */}
         <div className="p-4 py-3.5 flex items-center gap-2">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center">
             <Logo width={35} height={35} color="green" />
@@ -98,16 +97,15 @@ const Sidebar = () => {
           <span className="text-xl text-gray-700 font-bold">DevLinks</span>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 px-4 py-2">
+        <nav className="flex-1 px-4  py-2">
           <div className="space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => handleNavClick(item.id)}
+                onClick={() => handleNavClick(item.id,item.url)}
                 className={`
                    w-full flex items-center justify-start gap-3
-                   px-3 py-2 rounded-lg text-left text-gray-700 text-sm font-medium
+                   px-3 py-2 rounded-lg text-left text-gray-700 text-body font-medium
                    hover:bg-green-200 transition-colors
                   ${display === item.id ? "bg-green-100" : ""}
                 `}
@@ -118,7 +116,6 @@ const Sidebar = () => {
             ))}
           </div>
 
-          {/* Share Link */}
           {data && user?.username && (
             <div className="mt-8 px-1">
               <div className="p-4 rounded-xl text-gray-800 bg-white shadow-sm">
@@ -138,7 +135,6 @@ const Sidebar = () => {
           )}
         </nav>
 
-        {/* User Section */}
         {data && (
           <div className="p-4">
             <div className="flex items-center gap-3 p-2 rounded-xl transition-colors">

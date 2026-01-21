@@ -13,25 +13,25 @@ import {
 } from "lucide-react";
 
 const LinkSetup = () => {
-  const { links, setLinks } = useContext(AppContext)!;
-  const [newLink, setNewLink] = useState<LinkType>({ title: "", url: "" });
+  const { links, setLinks,user } = useContext(AppContext)!;
+  const [newLink, setNewLink] = useState<LinkType>({ title: "", url: "",userId:user  ? user.id  : "" });
   const [isAddingLink, setIsAddingLink] = useState(false);
 
-  const handleDeleteLink = (id: string) => {
-    if (links) {
-      setLinks(links.filter((link: LinkType) => link.id !== id));
-    }
-  };
+  // const handleDeleteLink = (id: string) => {
+  //   if (links) {
+  //     setLinks(links.filter((link: LinkType) => link.id !== id));
+  //   }
+  // };
 
-  const handleToggleLink = (id: string) => {
-    if (links) {
-      setLinks(
-        links.map((link: LinkType) =>
-          link.id === id ? { ...link, active: !link.active } : link
-        )
-      );
-    }
-  };
+  // const handleToggleLink = (id: string) => {
+  //   if (links) {
+  //     setLinks(
+  //       links.map((link: LinkType) =>
+  //         link.id === id ? { ...link, active: !link.active } : link
+  //       )
+  //     );
+  //   }
+  // };
 
   return (
     <div className="space-y-8">
@@ -61,11 +61,10 @@ const LinkSetup = () => {
         <div className="space-y-3">
           {links.map((link: LinkType, index: number) => (
             <div
-              key={link.id}
+              key={index}
               className="link-card animate-fade-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              {/* Drag Handle */}
               <div className="link-drag-handle">
                 <GripVertical size={20} className="" />
               </div>
@@ -84,7 +83,7 @@ const LinkSetup = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <button
+                {/* <button
                   onClick={() => handleToggleLink(link.id!)}
                   className={`toggle ${link.active ? "active" : ""}`}
                   title={link.active ? "Disable link" : "Enable link"}
@@ -96,7 +95,7 @@ const LinkSetup = () => {
                   title="Delete link"
                 >
                   <Trash2 size={16} />
-                </button>
+                </button> */}
               </div>
             </div>
           ))}

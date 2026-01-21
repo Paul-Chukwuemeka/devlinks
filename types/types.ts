@@ -39,6 +39,8 @@ export type LinkType = {
   collectionId?: string | null;
 };
 
+
+
 export type CreateLinkInput = {
   userId: string;
   title: string;
