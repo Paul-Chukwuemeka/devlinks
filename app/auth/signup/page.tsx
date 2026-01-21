@@ -28,20 +28,20 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-8 bg-surface-primary">
-        <div className="w-full max-w-md space-y-8">
-          <div className="lg:hidden flex items-center gap-3 justify-center mb-8">
-            <Logo width={40} height={40} color="var(--primary-600)" />
-            <span className="text-2xl font-bold text-text-primary">
+      <div className="flex-1 flex max-lg:items-start max-lg:pt-10 items-center justify-center p-8 bg-surface-primary">
+        <div className="w-full  max-w-md space-y-8">
+          <div className="lg:hidden flex  items-center gap-1 justify-center mb-8">
+            <Logo width={40} height={40} />
+            <span className="text-2xl font-bold">
               DevLinks
             </span>
           </div>
 
           <div className="text-center lg:text-left">
-            <h2 className="text-display text-text-primary mb-2">
+            <h2 className="text-display font-semibold mb-2">
               Create an account
             </h2>
-            <p className="text-body text-text-secondary">
+            <p className="text-body font-semibold">
               Get started with your free DevLinks page
             </p>
           </div>
@@ -89,18 +89,18 @@ const Page = () => {
                 <div className="w-full border-t border-border-light" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className=" bg-white text-body font-medium">OR</span>
+                <span className=" bg-white text-body w-20 text-center font-medium">OR</span>
               </div>
             </div>
 
             <GoogleButton />
           </form>
 
-          <p className="text-center text-text-secondary">
-            Already have an account?{" "}
+          <p className="text-center ">
+            Already have an account?
             <Link
               href="/auth/signin"
-              className="font-semibold text-primary-600 hover:text-primary-700"
+              className="font-semibold mx-2 text-primary-600 hover:text-primary-700"
             >
               Sign In
             </Link>
