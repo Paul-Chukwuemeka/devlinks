@@ -2,8 +2,8 @@
 import Image from "next/image";
 import { useContext, useState } from "react";
 import ProfileImageModal from "../features/select_profile_image";
-import { profileType } from "@/types/profile-type";
 import { AppContext } from "@/contexts/app_context";
+import { profileType } from "@/types/types";
 import UpdateUserProfile from "@/utils/updateUser";
 import { User, Camera, Loader2 } from "lucide-react";
 
@@ -42,10 +42,10 @@ const ProfileSetup = () => {
 
       {/* Header */}
       <div>
-        <h1 className="text-heading text-[var(--text-primary)] mb-2">
+        <h1 className="text-heading  mb-2">
           Profile Details
         </h1>
-        <p className="text-body text-[var(--text-secondary)]">
+        <p className="text-body ">
           Add your details to create a personal touch to your DevLinks profile.
         </p>
       </div>
@@ -63,7 +63,7 @@ const ProfileSetup = () => {
                 className="avatar avatar-xl"
               />
             ) : (
-              <div className="w-[100px] h-[100px] rounded-full bg-gradient-to-br from-[var(--primary-200)] to-[var(--primary-400)] flex items-center justify-center">
+              <div className="w-[100px] h-[100px] rounded-full  flex items-center justify-center">
                 <User size={40} className="text-white" />
               </div>
             )}
@@ -76,7 +76,7 @@ const ProfileSetup = () => {
             </button>
           </div>
           <div className="flex-1">
-            <h3 className="text-subheading text-[var(--text-primary)] mb-1">
+            <h3 className="text-subheading  mb-1">
               Profile Picture
             </h3>
             <p className="text-caption mb-3">
@@ -98,7 +98,7 @@ const ProfileSetup = () => {
         <div className="input-group">
           <label className="input-label">Username</label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-tertiary)] font-medium">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2  font-medium">
               @
             </span>
             <input
@@ -111,7 +111,7 @@ const ProfileSetup = () => {
               className="input pl-8"
             />
           </div>
-          <p className="text-xs text-[var(--text-tertiary)]">
+          <p className="text-xs ">
             This will be your unique URL: devlinks.to/{profile.username || "username"}
           </p>
         </div>
@@ -138,7 +138,7 @@ const ProfileSetup = () => {
             className="input textarea"
             rows={4}
           />
-          <p className="text-xs text-[var(--text-tertiary)] text-right">
+          <p className="text-xs  text-right">
             {profile.bio?.length || 0}/160
           </p>
         </div>
