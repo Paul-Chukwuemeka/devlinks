@@ -1,6 +1,6 @@
 "use client";
 import { createContext, ReactNode, useState, useEffect } from "react";
-import { AppContextType, userType, DisplayType,LinkType } from "@/types/types";
+import { AppContextType, userType, DisplayType, LinkType } from "@/types/types";
 import { authClient } from "@/lib/auth-client";
 import { getUser } from "@/utils/getUserInfo";
 
@@ -35,20 +35,20 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     async function getData() {
       if (currentUser && !user) {
         const data = await getUser(currentUser.id);
-        setUser(data)
+        setUser(data);
       }
     }
     getData();
-  }, [currentUser,user]);
+  }, [currentUser, user]);
 
-  // useEffect(()=>{
-  //   async function fetchLinks() {
-  //     if (user && user.links) {
-  //       setLinks(user.links);
-  //     }
-  //   }
-  //   fetchLinks();
-  // },[])
+  useEffect(() => {
+    async function fetchLinks() {
+      if (user && user.links) {
+        setLinks(user.links);
+      }
+    }
+    fetchLinks();
+  }, [user]);
 
   useEffect(() => {
     console.log("Preview Mode:", isPreviewMode);

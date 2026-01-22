@@ -7,7 +7,6 @@ import { LinkType } from "@/types/types";
 import {
   Plus,
   GripVertical,
-  Trash2,
   ExternalLink,
   Link as LinkIcon,
 } from "lucide-react";
@@ -62,7 +61,7 @@ const LinkSetup = () => {
           {links.map((link: LinkType, index: number) => (
             <div
               key={index}
-              className="link-card animate-fade-in"
+              className="link-card flex gap-2 items-center animate-fade-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <div className="link-drag-handle">
@@ -101,7 +100,7 @@ const LinkSetup = () => {
           ))}
         </div>
       )}
-      {!isAddingLink && (
+      {!isAddingLink  && !links && (
         <div className="p-12 flex flex-col items-center text-center animate-fade-in">
           <LinkIcon size={40} className="" />
           <h3 className="my-3 text-xl">No links yet</h3>

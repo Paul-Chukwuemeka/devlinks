@@ -1,8 +1,8 @@
 import Main from "@/components/layout/main";
-import Settings from "@/components/layout/settings";
+import ProfileSetup from "@/components/layout/setup_profile";
 
 const Page = () => {
-  return <Main content={<Settings />} />;
+  return <Main content={<ProfileSetup />} />;
 };
 
 export default Page;

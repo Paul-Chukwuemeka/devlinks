@@ -9,6 +9,8 @@ import Link from "next/link";
 const Preview = () => {
   const { user, links } = useContext(AppContext)!;
 
+  console.log(user);
+
   function getFaviconUrl(linkUrl: string) {
     try {
       const url = new URL(linkUrl);

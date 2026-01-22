@@ -31,7 +31,6 @@ const ProfileSetup = () => {
 
   return (
     <div className="space-y-8">
-      {/* Profile Image Modal */}
       {isProfileImageModalOpen && (
         <ProfileImageModal
           setIsProfileImageModalOpen={setIsProfileImageModalOpen}
@@ -40,7 +39,6 @@ const ProfileSetup = () => {
         />
       )}
 
-      {/* Header */}
       <div>
         <h1 className="text-heading  mb-2">
           Profile Details
@@ -50,24 +48,22 @@ const ProfileSetup = () => {
         </p>
       </div>
 
-      {/* Profile Picture Card */}
       <div className="card p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
           <div className="relative group">
             {profile.image ? (
               <Image
-                src={profile.image}
+                src={"https://jdjdebqivqrbhqgfgiwr.supabase.co/storage/v1/object/public/avatars/avataaars-16.svg"}
                 alt="Profile"
                 width={100}
                 height={100}
                 className="avatar avatar-xl"
               />
             ) : (
-              <div className="w-[100px] h-[100px] rounded-full  flex items-center justify-center">
-                <User size={40} className="text-white" />
+              <div className="w-[100px] border border-gray-400 h-[100px] rounded-full  flex items-center justify-center">
+                <User size={40} className="text-gray-600" />
               </div>
             )}
-            {/* Hover Overlay */}
             <button
               onClick={() => setIsProfileImageModalOpen(true)}
               className="absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
@@ -92,9 +88,7 @@ const ProfileSetup = () => {
         </div>
       </div>
 
-      {/* Form Fields Card */}
       <div className="card p-6 space-y-6">
-        {/* Username */}
         <div className="input-group">
           <label className="input-label">Username</label>
           <div className="relative">
@@ -116,7 +110,6 @@ const ProfileSetup = () => {
           </p>
         </div>
 
-        {/* Name */}
         <div className="input-group">
           <label className="input-label">Display Name</label>
           <input
@@ -128,7 +121,6 @@ const ProfileSetup = () => {
           />
         </div>
 
-        {/* Bio */}
         <div className="input-group">
           <label className="input-label">Bio</label>
           <textarea
@@ -144,7 +136,6 @@ const ProfileSetup = () => {
         </div>
       </div>
 
-      {/* Save Button */}
       <div className="flex justify-end">
         <button
           onClick={handleSave}

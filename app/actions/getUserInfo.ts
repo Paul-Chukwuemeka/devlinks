@@ -8,6 +8,7 @@ export default async function getUserInfo(id: string) {
     },
     include: {
       cards: true,
+      links:true,
     },
     omit: {
       createdAt: true,

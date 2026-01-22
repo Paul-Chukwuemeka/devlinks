@@ -13,6 +13,7 @@ export type userType = {
   bio: string | null;
   username: string | null;
   cards: cardType[];
+  links: LinkType[]
 };
 
 export type DisplayType = "links" | "profile" | "appearance" | "settings";
