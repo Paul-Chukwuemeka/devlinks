@@ -3,9 +3,9 @@
 @theme {
   --text-heading: 23px;
   --text-primary: #212020;
-  --text-body:16px;
+  --text-body: 16px;
   --text-display: 40px;
-  --color-primary-600: #00a63e
+  --color-primary-600: #00a63e;
 }
 
 button {
@@ -16,8 +16,8 @@ button {
   }
 }
 
-.auth-button{
-@apply w-full h-12 flex items-center justify-center gap-3 border rounded-lg font-semibold   active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed shadow-sm transition-all duration-200
+.auth-button {
+  @apply w-full h-12 flex items-center justify-center gap-3 border rounded-lg font-semibold   active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed shadow-sm transition-all duration-200;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -25,7 +25,7 @@ button {
 }
 
 .link-btn {
-  @apply h-12 gap-2 border flex items-center p-2;
+  @apply h-12 gap-2 flex shadow-[0_0_10px] shadow-gray-300 items-center p-2;
 }
 
 .text-base {
@@ -38,4 +38,8 @@ button {
 
 .auth-input {
   @apply border relative [&>input]:overflow-hidden rounded-lg h-14;
+}
+
+.link-card {
+  @apply h-25 rounded-xl w-full shadow-[0px_0px_10px] p-4 shadow-gray-200 max-w-150;
 }

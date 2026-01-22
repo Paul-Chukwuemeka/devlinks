@@ -9,8 +9,6 @@ import Link from "next/link";
 const Preview = () => {
   const { user, links } = useContext(AppContext)!;
 
-  console.log(user);
-
   function getFaviconUrl(linkUrl: string) {
     try {
       const url = new URL(linkUrl);
@@ -56,7 +54,6 @@ const Preview = () => {
               )}
             </div>
 
-            {/* Links Section */}
             <div className="w-full flex-1 p-2 px-4 space-y-3">
               {links &&
                 links.length > 0 &&
@@ -64,7 +61,7 @@ const Preview = () => {
                   const faviconUrl = getFaviconUrl(link.url);
                   return (
                     <Link href={link.url} className="link-btn" key={index}>
-                      <div className="w-8 rounded-full flex items-center justify-center h-8 border overflow-hidden">
+                      <div className="w-8 rounded-full flex items-center justify-center h-8 overflow-hidden">
                         {faviconUrl ? (
                           <Image
                             alt={link.title}
@@ -79,7 +76,7 @@ const Preview = () => {
                           </div>
                         )}
                       </div>
-                      <span className="flex-1">Your Link 1</span>
+                      <span className="flex-1">{link.title}</span>
                       <button>
                         <BsThreeDotsVertical size={14} />
                       </button>

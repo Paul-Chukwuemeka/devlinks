@@ -12,8 +12,12 @@ import {
 } from "lucide-react";
 
 const LinkSetup = () => {
-  const { links, setLinks,user } = useContext(AppContext)!;
-  const [newLink, setNewLink] = useState<LinkType>({ title: "", url: "",userId:user  ? user.id  : "" });
+  const { links, setLinks, user } = useContext(AppContext)!;
+  const [newLink, setNewLink] = useState<LinkType>({
+    title: "",
+    url: "",
+    userId: user ? user.id : "",
+  });
   const [isAddingLink, setIsAddingLink] = useState(false);
 
   // const handleDeleteLink = (id: string) => {
@@ -38,13 +42,6 @@ const LinkSetup = () => {
         <div>
           <h1 className="text-heading font-semibold mb-2">Links</h1>
         </div>
-        <button
-          onClick={() => setIsAddingLink(true)}
-          className="flex font-semibold items-center text-sm gap-1 bg-green-300 hover:bg-green-400 text-gray-700 h-9 w-25 rounded-md justify-center"
-        >
-          <Plus size={18} />
-          Add Link
-        </button>
       </div>
 
       {isAddingLink && (
@@ -55,13 +52,19 @@ const LinkSetup = () => {
         />
       )}
 
-      {/* Links List */}
       {links && links.length > 0 && (
-        <div className="space-y-3">
+        <div className="space-y-3  flex flex-col items-center ">
+          <button
+            onClick={() => setIsAddingLink(true)}
+            className="flex h-14 text-md font-semibold items-center gap-1 bg-green-300 hover:bg-green-400 text-gray-700 w-full max-w-150 rounded-md justify-center"
+          >
+            <Plus size={18} />
+            Add Link
+          </button>
           {links.map((link: LinkType, index: number) => (
             <div
               key={index}
-              className="link-card flex gap-2 items-center animate-fade-in"
+              className="link-card  flex gap-4 items-center animate-fade-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <div className="link-drag-handle">
@@ -100,7 +103,7 @@ const LinkSetup = () => {
           ))}
         </div>
       )}
-      {!isAddingLink  && !links && (
+      {!isAddingLink && !links && (
         <div className="p-12 flex flex-col items-center text-center animate-fade-in">
           <LinkIcon size={40} className="" />
           <h3 className="my-3 text-xl">No links yet</h3>
