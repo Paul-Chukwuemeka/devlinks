@@ -1,12 +1,13 @@
 import { useGetAvatars } from "@/hooks/useGetAvatars";
 import Image from "next/image";
-import React, { Activity, useEffect, useRef, useState } from "react";
-import { profileType } from "@/types/profile-type";
+import React, { Activity, useRef, useState } from "react";
+import { profileType } from "@/types/types";
 import { uploadUserPhoto } from "@/lib/uploadUserPhoto";
 import { useContext } from "react";
 import { AppContext } from "@/contexts/app_context";
 import Loader from "../ui/loader";
 import UpdateUser from "@/app/actions/updateUserProfile";
+
 
 enum loadingMode {
   inactive = "inactive",

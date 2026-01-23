@@ -2,24 +2,11 @@ import { useContext } from "react";
 import Image from "next/image";
 import { AppContext } from "../../contexts/app_context";
 import { User } from "lucide-react";
-import { LinkType } from "@/types/types";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import Link from "next/link";
+import RenderLinks from "./renderLinks";
 
 const Preview = () => {
   const { user, links } = useContext(AppContext)!;
 
-  function getFaviconUrl(linkUrl: string) {
-    try {
-      const url = new URL(linkUrl);
-      return `https://www.google.com/s2/favicons?domain=${url.hostname}&size=32`;
-    } catch (error) {
-      console.error("Invalid URL:", linkUrl, error);
-      return "";
-    }
-  }
-
-  
   return (
     <div className="hidden lg:flex items-center justify-center p-6">
       <div className="border-2 border-gray-200 rounded-xl w-80 h-full max-h-160">
@@ -53,37 +40,8 @@ const Preview = () => {
                 </p>
               )}
             </div>
+            <RenderLinks links={links || []} />
 
-            <div className="w-full flex-1 p-2 px-4 space-y-3">
-              {links &&
-                links.length > 0 &&
-                links.map((link: LinkType, index: number) => {
-                  const faviconUrl = getFaviconUrl(link.url);
-                  return (
-                    <Link href={link.url} className="link-btn" key={index}>
-                      <div className="w-8 rounded-full flex items-center justify-center h-8 overflow-hidden">
-                        {faviconUrl ? (
-                          <Image
-                            alt={link.title}
-                            src={faviconUrl}
-                            width={20}
-                            height={20}
-                            className="w-full h-full"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-gray-100"> 
-                            <span className="text-xs">🔗</span>
-                          </div>
-                        )}
-                      </div>
-                      <span className="flex-1">{link.title}</span>
-                      <button>
-                        <BsThreeDotsVertical size={14} />
-                      </button>
-                    </Link>
-                  );
-                })}
-            </div>
             {/* Branding */}
             <div className="mt-auto pt-8 pb-4">
               <p className="text-[10px] font-medium">Made with DevLinks</p>

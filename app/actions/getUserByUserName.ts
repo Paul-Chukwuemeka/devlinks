@@ -1,10 +1,10 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 
-export default async function getUserInfo(id: string) {
+export default async function getUserByUserName(username: string) {
   const data = await prisma.user.findFirst({
     where: {
-      id: id,
+      username: username,
     },
     include: {
       cards: true,

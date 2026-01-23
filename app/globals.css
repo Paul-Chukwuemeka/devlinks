@@ -25,7 +25,7 @@ button {
 }
 
 .link-btn {
-  @apply h-12 gap-2 flex shadow-[0_0_10px] shadow-gray-300 items-center p-2;
+  @apply h-15 relative gap-2 flex shadow-[0_0_10px] shadow-gray-300 items-center p-4;
 }
 
 .text-base {
