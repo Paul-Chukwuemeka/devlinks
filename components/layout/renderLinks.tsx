@@ -16,7 +16,7 @@ function getFaviconUrl(linkUrl: string) {
 
 const RenderLinks = ({ links }: { links: LinkType[] }) => {
   return (
-    <div className="w-full flex-1 p-2 px-4 space-y-3">
+    <div className="w-full flex-1 p-2 max-sm:px-1 px-4 space-y-3">
       {links &&
         links.length > 0 &&
         links.map((link: LinkType, index: number) => {
@@ -38,10 +38,14 @@ const RenderLinks = ({ links }: { links: LinkType[] }) => {
                   </div>
                 )}
               </div>
-              <span className="flex-1">{link.title}</span>
+              <span className="flex-1 max-sm:text-xs truncate">{link.title}</span>
               <button
-              className=" p-2 rounded-full bg-gray-50 "
-              onClick={(e) => e.stopPropagation()}>
+                className=" p-2 rounded-full bg-gray-50 "
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+              >
                 <BsThreeDotsVertical size={16} />
               </button>
             </Link>
