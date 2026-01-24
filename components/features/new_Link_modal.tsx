@@ -8,29 +8,64 @@ interface NewLinkModalProps {
   setIsAddingLink: (value: boolean) => void;
   newLink: LinkType;
   setNewLink: (link: LinkType) => void;
+  collectionId?: string;
 }
 
 const New_Link_modal = ({
   setIsAddingLink,
   newLink,
   setNewLink,
+  collectionId,
 }: NewLinkModalProps) => {
-  const { setLinks, links,user } = useContext(AppContext)!;
+  const { setLinks, links, user, cards, setCards } = useContext(AppContext)!;
 
-  const handleAddLink = () => {
-    if (newLink.title && newLink.url) {
+  const handleAddLink = async () => {
+    if (newLink.title && newLink.url && user) {
       const link: LinkType = {
         title: newLink.title,
-        userId: user!.id,
+        userId: user.id,
         url: newLink.url.startsWith("http")
           ? newLink.url
           : `https://${newLink.url}`,
-        orderNum: links ? links.length + 1 : 1,
+        collectionId: collectionId ?? null,
       };
-      addLink(link,user?.id).then(() => {
-        setLinks(links ? [...links, link] : [link]);
-      });
-      setNewLink({ title: "", url: "" , userId: ""});
+
+      // Calculate orderNum based on target location
+      if (collectionId) {
+        // Find existing links in this collection to get next orderNum
+        const card = cards?.find((c) =>
+          c.collections.some((col) => col.id === collectionId),
+        );
+        const collection = card?.collections.find(
+          (col) => col.id === collectionId,
+        );
+        link.orderNum = (collection?.links?.length || 0) + 1;
+      } else {
+        link.orderNum = (links?.length || 0) + 1;
+      }
+
+      const res = await addLink(link, user.id, collectionId);
+
+      if (res) {
+        const savedLink = res as LinkType;
+        if (collectionId) {
+          // Update cards state
+          const updatedCards = cards ? [...cards] : [];
+          for (const card of updatedCards) {
+            const col = card.collections.find((c) => c.id === collectionId);
+            if (col) {
+              col.links = [...(col.links || []), savedLink];
+              break;
+            }
+          }
+          setCards(updatedCards);
+        } else {
+          // Update direct links state
+          setLinks(links ? [...links, savedLink] : [savedLink]);
+        }
+      }
+
+      setNewLink({ title: "", url: "", userId: "" });
       setIsAddingLink(false);
     }
   };

@@ -7,8 +7,30 @@ export default async function getUserByUserName(username: string) {
       username: username,
     },
     include: {
-      cards: true,
-      links: true,
+      cards: {
+        include: {
+          collections: {
+            include: {
+              links: {
+                orderBy: {
+                  orderNum: "asc",
+                },
+              },
+            },
+            orderBy: {
+              orderNum: "asc",
+            },
+          },
+        },
+      },
+      links: {
+        where: {
+          collectionId: null,
+        },
+        orderBy: {
+          orderNum: "asc",
+        },
+      },
     },
     omit: {
       createdAt: true,

@@ -27,13 +27,19 @@ const Page = async ({ params }: PageProps) => {
           height={110}
           className="rounded-full max-md:w-20 mb-4 border border-gray-200"
         />
-        <h1 className="text-3xl max-md:text-xl font-semibold mb-2">{data.name}</h1>
-        <p className="text-gray-600 mb-4 max-md:text-sm text-lg">@{data.username}</p>
+        <h1 className="text-3xl max-md:text-xl font-semibold mb-2">
+          {data.name}
+        </h1>
+        <p className="text-gray-600 mb-4 max-md:text-sm text-lg">
+          @{data.username}
+        </p>
 
         {data.bio && (
-          <p className="text-center max-lg:text-sm text-gray-700 mb-4">{data.bio}</p>
+          <p className="text-center max-lg:text-sm text-gray-700 mb-4">
+            {data.bio}
+          </p>
         )}
-        <RenderLinks links={data.links || []} />
+        <RenderLinks links={data.links || []} cards={data.cards || []} />
       </div>
     </div>
   );

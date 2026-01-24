@@ -3,6 +3,7 @@ export type cardType = {
   userId: string;
   title: string;
   description: string | null;
+  collections: collectionType[];
 };
 
 export type userType = {
@@ -13,7 +14,7 @@ export type userType = {
   bio: string | null;
   username: string | null;
   cards: cardType[];
-  links: LinkType[]
+  links: LinkType[]; // Direct links not in a collection
 };
 
 export type DisplayType = "links" | "profile" | "appearance" | "settings";
@@ -23,6 +24,8 @@ export type AppContextType = {
   setUser: (user: userType | null) => void;
   links?: LinkType[];
   setLinks: (links: LinkType[]) => void;
+  cards?: cardType[];
+  setCards: (cards: cardType[]) => void;
   isPreviewMode?: boolean;
   setIsPreviewMode: (isPreviewMode: boolean) => void;
   display?: DisplayType;
@@ -32,6 +35,7 @@ export type AppContextType = {
 // Link types
 
 export type LinkType = {
+  id?: string;
   title: string;
   url: string;
   active?: boolean;
@@ -39,8 +43,6 @@ export type LinkType = {
   orderNum?: number;
   collectionId?: string | null;
 };
-
-
 
 export type CreateLinkInput = {
   userId: string;
@@ -53,6 +55,7 @@ export type collectionType = {
   title: string;
   links: LinkType[];
   id: string;
+  orderNum?: number;
 };
 
 // profile types

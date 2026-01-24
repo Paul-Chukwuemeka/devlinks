@@ -5,7 +5,7 @@ import { User } from "lucide-react";
 import RenderLinks from "./renderLinks";
 
 const Preview = () => {
-  const { user, links } = useContext(AppContext)!;
+  const { user, links, cards } = useContext(AppContext)!;
 
   return (
     <div className="hidden lg:flex items-center justify-center p-6">
@@ -40,7 +40,7 @@ const Preview = () => {
                 </p>
               )}
             </div>
-            <RenderLinks links={links || []} />
+            <RenderLinks links={links || []} cards={cards || []} />
 
             {/* Branding */}
             <div className="mt-auto pt-8 pb-4">

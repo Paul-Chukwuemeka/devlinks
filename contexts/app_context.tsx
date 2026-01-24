@@ -1,6 +1,12 @@
 "use client";
 import { createContext, ReactNode, useState, useEffect } from "react";
-import { AppContextType, userType, DisplayType, LinkType } from "@/types/types";
+import {
+  AppContextType,
+  userType,
+  DisplayType,
+  LinkType,
+  cardType,
+} from "@/types/types";
 import { authClient } from "@/lib/auth-client";
 import { getUser } from "@/utils/getUserInfo";
 
@@ -9,6 +15,8 @@ export const AppContext = createContext<AppContextType | null>({
   setUser: () => {},
   links: [],
   setLinks: () => {},
+  cards: [],
+  setCards: () => {},
   isPreviewMode: false,
   setIsPreviewMode: () => {},
   display: "links",
@@ -18,6 +26,7 @@ export const AppContext = createContext<AppContextType | null>({
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<userType | null>(null);
   const [links, setLinks] = useState<LinkType[]>([]);
+  const [cards, setCards] = useState<cardType[]>([]);
   const [display, setDisplay] = useState<DisplayType>("links");
   const [isPreviewMode, setIsPreviewMode] = useState<boolean>(false);
   const contextValue: AppContextType = {
@@ -25,6 +34,8 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setUser,
     links,
     setLinks,
+    cards,
+    setCards,
     isPreviewMode,
     setIsPreviewMode,
     display,
@@ -35,19 +46,20 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     async function getData() {
       if (currentUser && !user) {
         const data = await getUser(currentUser.id);
-        setUser(data);
+        setUser(data as any);
       }
     }
     getData();
   }, [currentUser, user]);
 
   useEffect(() => {
-    async function fetchLinks() {
-      if (user && user.links) {
-        setLinks(user.links);
+    async function fetchData() {
+      if (user) {
+        if (user.links) setLinks(user.links);
+        if (user.cards) setCards(user.cards);
       }
     }
-    fetchLinks();
+    fetchData();
   }, [user]);
 
   useEffect(() => {

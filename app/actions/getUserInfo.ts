@@ -7,8 +7,30 @@ export default async function getUserInfo(id: string) {
       id: id,
     },
     include: {
-      cards: true,
-      links: true,
+      cards: {
+        include: {
+          collections: {
+            include: {
+              links: {
+                orderBy: {
+                  orderNum: "asc",
+                },
+              },
+            },
+            orderBy: {
+              orderNum: "asc",
+            },
+          },
+        },
+      },
+      links: {
+        where: {
+          collectionId: null, // Only fetch direct links separately if desired
+        },
+        orderBy: {
+          orderNum: "asc",
+        },
+      },
     },
     omit: {
       createdAt: true,
