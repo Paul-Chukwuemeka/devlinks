@@ -25,14 +25,29 @@ interface NavItem {
   id: NavItemType;
   label: string;
   icon: React.ReactNode;
-  url: string
+  url: string;
 }
 
 const navItems: NavItem[] = [
-  { id: "links", label: "Links", url:"/admin", icon: <Link2 size={20} /> },
-  { id: "profile", label: "Profile", url:"/admin/profile-setup", icon: <User size={20} /> },
-  { id: "appearance", label: "Appearance", url:"/admin/appearance", icon: <Palette size={20} /> },
-  { id: "settings", label: "Settings", url:"/admin/settings", icon: <Settings size={20} /> },
+  { id: "links", label: "Links", url: "/admin", icon: <Link2 size={20} /> },
+  {
+    id: "profile",
+    label: "Profile",
+    url: "/admin/profile-setup",
+    icon: <User size={20} />,
+  },
+  {
+    id: "appearance",
+    label: "Appearance",
+    url: "/admin/appearance",
+    icon: <Palette size={20} />,
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    url: "/admin/settings",
+    icon: <Settings size={20} />,
+  },
 ];
 
 const Sidebar = () => {
@@ -40,7 +55,6 @@ const Sidebar = () => {
   const { data } = authClient.useSession();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const router = useRouter();
-
 
   const handleNavClick = (id: NavItemType, url: string) => {
     setDisplay(id);
@@ -102,7 +116,7 @@ const Sidebar = () => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => handleNavClick(item.id,item.url)}
+                onClick={() => handleNavClick(item.id, item.url)}
                 className={`
                    w-full flex items-center justify-start gap-3
                    px-3 py-2 rounded-lg text-left text-gray-700 text-body font-medium

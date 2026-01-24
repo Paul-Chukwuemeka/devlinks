@@ -15,7 +15,7 @@ const Not_found = () => {
             </p>
             <Link
               href="/"
-              className="px-5 py-2.5 text-sm font-semibold text-white bg-primary-600 rounded-full hover:bg-primary-700 transition-colors shadow-sm cursor-pointer"
+              className="px-5 py-2.5 text-sm font-semibold text-white bg-green-600 rounded-full hover:bg-primary-700 transition-colors shadow-sm cursor-pointer"
             >
               Go Back Home
             </Link>

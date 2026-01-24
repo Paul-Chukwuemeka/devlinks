@@ -21,7 +21,7 @@ export const LandingHeader = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface-primary/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="bg-primary-600 rounded-lg p-1.5 text-white">
+          <div className="bg-green-600 rounded-lg p-1.5 text-white">
             <Logo width={24} height={24} color="white" />
           </div>
           <span className="text-xl font-extrabold tracking-tight text-text-primary">
@@ -38,7 +38,7 @@ export const LandingHeader = () => {
           </Link>
           <Link
             href="/auth/signup"
-            className="px-5 py-2.5 text-sm font-semibold text-white bg-primary-600 rounded-full hover:bg-primary-700 transition-colors shadow-sm cursor-pointer"
+            className="px-5 py-2.5 text-sm font-semibold text-white bg-green-600 rounded-full hover:bg-primary-700 transition-colors shadow-sm cursor-pointer"
           >
             Sign Up
           </Link>

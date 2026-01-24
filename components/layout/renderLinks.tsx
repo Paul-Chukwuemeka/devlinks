@@ -7,7 +7,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 function getFaviconUrl(linkUrl: string) {
   try {
     const url = new URL(linkUrl);
-    return `https://www.google.com/s2/favicons?domain=${url.hostname}&size=32`;
+    return `https://www.google.com/s2/favicons?domain=${url.hostname}&size=64`;
   } catch (error) {
     console.error("Invalid URL:", linkUrl, error);
     return "";

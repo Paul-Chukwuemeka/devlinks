@@ -71,13 +71,13 @@ const LinkSetup = () => {
                 <GripVertical size={20} className="" />
               </div>
 
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold  truncate">{link.title}</p>
+              <div className="flex-1  truncate">
+                <p className="font-semibold ">{link.title}</p>
                 <a
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm  truncate flex items-center gap-1"
+                  className="text-sm flex items-center gap-1"
                 >
                   {link.url}
                   <ExternalLink size={12} />

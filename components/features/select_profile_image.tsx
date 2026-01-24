@@ -8,11 +8,11 @@ import { AppContext } from "@/contexts/app_context";
 import Loader from "../ui/loader";
 import UpdateUser from "@/app/actions/updateUserProfile";
 
-
 enum loadingMode {
   inactive = "inactive",
   pending = "pending",
   completed = "completed",
+  failed = "failed",
 }
 
 interface props {
@@ -44,7 +44,8 @@ const Select_Profile_Image = ({
       const { publicUrl } = await uploadUserPhoto(imgFile);
       setProfile((prev) => ({ ...prev, image: publicUrl! }));
     } catch (error) {
-      console.error("Error uploading image:", error);
+      console.log("Error uploading image:", error);
+      setUploading(loadingMode.failed)
     } finally {
       setUploading(loadingMode.completed);
     }
@@ -58,6 +59,7 @@ const Select_Profile_Image = ({
       console.log(error);
     } finally {
       setIsLoading(false);
+      
     }
   }
 
@@ -65,7 +67,7 @@ const Select_Profile_Image = ({
 
   return (
     <div
-      className="w-full h-full flex flex-col items-center justify-center fixed backdrop-blur-sm"
+      className="w-full h-full z-50 flex flex-col items-center justify-center top-0 left-0 fixed backdrop-blur-sm"
       onClick={() => setIsProfileImageModalOpen(false)}
     >
       <div
@@ -75,7 +77,7 @@ const Select_Profile_Image = ({
       >
         <h2 className="text-2xl font-semibold mb-4">Select Profile Image</h2>
         {loading && <Loader />}
-        {error && <div></div>}
+        {error && <p>Failed to fetch avatars</p>}
         {avatars && !loading && !error && (
           <div className="flex flex-wrap items-center justify-center gap-4">
             {avatars.map((avatar, i) => {
@@ -104,7 +106,6 @@ const Select_Profile_Image = ({
             })}
           </div>
         )}
-
 
         <span className="text-xl font-semibold">Or</span>
         <Activity mode={`${custom ? "hidden" : "visible"}`}>
@@ -151,7 +152,7 @@ const Select_Profile_Image = ({
                 }
               }}
             >
-              Upload Image
+              {uploading === loadingMode.pending ? <Loader /> : "Upload Image"}
             </button>
             <p
               className="text-red-600 text-sm underline cursor-pointer "
@@ -200,6 +201,9 @@ const Select_Profile_Image = ({
           {isloading ? <Loader /> : "Save"}
         </button>
       </div>
+      <div
+        className={`border w-85 h-15 absolute right-2 ${uploading == loadingMode.failed ? "bottom-2" : "top-2"} `}
+      ></div>
     </div>
   );
 };

@@ -16,8 +16,7 @@ export const useGetAvatars = () => {
       });
 
       if (error) {
-        console.error("Error fetching avatars:", error);
-        return [];
+        throw new Error("failed to fetch")
       }
 
       const names = data.map((item) => item.name);
@@ -34,7 +33,7 @@ export const useGetAvatars = () => {
     const fetchAvatars = async () => {
       try {
         const urls = await getAvatars();
-        if (mounted.current) setAvatars(urls);
+        if (mounted.current && urls) setAvatars(urls);
       } catch (err) {
         if (mounted.current)
           setError(

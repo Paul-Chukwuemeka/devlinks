@@ -40,9 +40,7 @@ const ProfileSetup = () => {
       )}
 
       <div>
-        <h1 className="text-heading  mb-2">
-          Profile Details
-        </h1>
+        <h1 className="text-heading  mb-2">Profile Details</h1>
         <p className="text-body ">
           Add your details to create a personal touch to your DevLinks profile.
         </p>
@@ -53,11 +51,13 @@ const ProfileSetup = () => {
           <div className="relative group">
             {profile.image ? (
               <Image
-                src={"https://jdjdebqivqrbhqgfgiwr.supabase.co/storage/v1/object/public/avatars/avataaars-16.svg"}
+                src={
+                  "https://jdjdebqivqrbhqgfgiwr.supabase.co/storage/v1/object/public/avatars/avataaars-16.svg"
+                }
                 alt="Profile"
                 width={100}
                 height={100}
-                className="avatar avatar-xl"
+                className="avatar border-2 border-gray-100 rounded-full avatar-xl"
               />
             ) : (
               <div className="w-[100px] border border-gray-400 h-[100px] rounded-full  flex items-center justify-center">
@@ -72,15 +72,15 @@ const ProfileSetup = () => {
             </button>
           </div>
           <div className="flex-1">
-            <h3 className="text-subheading  mb-1">
+            <h3 className="text-subheading font-medium mb-1">
               Profile Picture
             </h3>
-            <p className="text-caption mb-3">
+            <p className="text-sm mb-3">
               Upload a photo to personalize your profile.
             </p>
             <button
               onClick={() => setIsProfileImageModalOpen(true)}
-              className="btn btn-secondary"
+              className="bg-green-400 h-10 px-5 rounded-lg font-semibold text-gray-700"
             >
               Change Picture
             </button>
@@ -100,13 +100,17 @@ const ProfileSetup = () => {
               placeholder="your username"
               value={profile.username}
               onChange={(e) =>
-                setProfile({ ...profile, username: e.target.value.toLowerCase().replace(/\s/g, '') })
+                setProfile({
+                  ...profile,
+                  username: e.target.value.toLowerCase().replace(/\s/g, ""),
+                })
               }
               className="input pl-8"
             />
           </div>
           <p className="text-xs ">
-            This will be your unique URL: devlinks.to/{profile.username || "username"}
+            This will be your unique URL: devlinks.to/
+            {profile.username || "username"}
           </p>
         </div>
 
@@ -130,9 +134,7 @@ const ProfileSetup = () => {
             className="input textarea"
             rows={4}
           />
-          <p className="text-xs  text-right">
-            {profile.bio?.length || 0}/160
-          </p>
+          <p className="text-xs  text-right">{profile.bio?.length || 0}/160</p>
         </div>
       </div>
 
